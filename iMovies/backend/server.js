@@ -4,6 +4,7 @@ const { Server } = require('socket.io');
 const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const connectDB = require('./config/db');
@@ -28,8 +29,8 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE']
-  }
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
 });
 
 // Attach io to app context for controllers
@@ -46,7 +47,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/', apiLimiter);
 app.use('/api/auth/', authLimiter);
 
-// Routes
+// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/theatres', theatreRoutes);
@@ -60,7 +61,7 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
     message: 'IMovies Cinema Booking API is active and running',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -68,18 +69,15 @@ app.get('/api/health', (req, res) => {
 io.on('connection', (socket) => {
   console.log(`[Socket] User connected: ${socket.id}`);
 
-  // User joins a specific show room
   socket.on('join-show', (showId) => {
     socket.join(showId);
     console.log(`[Socket] Client ${socket.id} joined show room: ${showId}`);
   });
 
-  // User temporarily locks / selects a seat
   socket.on('seat-select', ({ showId, seatNumber, userId }) => {
     socket.to(showId).emit('seat-selected-live', { seatNumber, userId });
   });
 
-  // User deselects a seat
   socket.on('seat-deselect', ({ showId, seatNumber, userId }) => {
     socket.to(showId).emit('seat-deselected-live', { seatNumber, userId });
   });
@@ -89,6 +87,18 @@ io.on('connection', (socket) => {
   });
 });
 
+// Serve Frontend Static Build if present
+const frontendBuild = path.join(__dirname, '../frontend/build');
+if (fs.existsSync(frontendBuild)) {
+  app.use(express.static(frontendBuild));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/socket.io')) {
+      return next();
+    }
+    res.sendFile(path.join(frontendBuild, 'index.html'));
+  });
+}
+
 // Centralized Error Handler (must be after routes)
 app.use(errorHandler);
 
@@ -96,7 +106,6 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`===============================================`);
   console.log(` 🎬 IMovies Server running on port ${PORT}`);
-  console.log(` 🚀 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(` 🚀 Web App URL: http://localhost:${PORT}`);
   console.log(`===============================================`);
 });
-

@@ -3,15 +3,27 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 2000,
     });
-    console.log(`[MongoDB] Database connected successfully: ${conn.connection.host}`);
+    console.log(`[MongoDB] Connected to standalone instance: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`[MongoDB] Connection Failed: ${error.message}`);
-    // Don't kill process immediately in local dev so instructions and non-db calls can still be inspected
+    console.log(`[MongoDB] Standalone daemon not found. Initializing embedded MongoDB server...`);
+    try {
+      const { MongoMemoryServer } = require('mongodb-memory-server');
+      const mongod = await MongoMemoryServer.create();
+      const uri = mongod.getUri();
+      await mongoose.connect(uri);
+      console.log(`[MongoDB] Embedded MongoDB instance started successfully at: ${uri}`);
+
+      // Auto-seed initial data
+      const seedData = require('../seed');
+      if (typeof seedData === 'function') {
+        await seedData();
+      }
+    } catch (memErr) {
+      console.error(`[MongoDB] Failed to initialize embedded MongoDB:`, memErr.message);
+    }
   }
 };
 
 module.exports = connectDB;
-

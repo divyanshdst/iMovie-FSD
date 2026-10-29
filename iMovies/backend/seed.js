@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
-
 const User = require('./models/User');
 const Movie = require('./models/Movie');
 const Theatre = require('./models/Theatre');
@@ -10,11 +8,7 @@ const Payment = require('./models/Payment');
 
 const seedData = async () => {
   try {
-    console.log('Connecting to MongoDB for seeding...');
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/imoviesdb');
-    console.log('MongoDB Connected.');
-
-    console.log('Clearing old sample records...');
+    console.log('Seeding initial records...');
     await Promise.all([
       User.deleteMany({}),
       Movie.deleteMany({}),
@@ -25,7 +19,6 @@ const seedData = async () => {
     ]);
 
     // 1. Create Users
-    console.log('Seeding Users...');
     const admin = await User.create({
       name: 'System Administrator',
       email: 'admin@imovies.com',
@@ -43,7 +36,6 @@ const seedData = async () => {
     });
 
     // 2. Create Movies
-    console.log('Seeding Movies...');
     const movies = await Movie.create([
       {
         title: 'Interstellar: Beyond Time',
@@ -141,7 +133,6 @@ const seedData = async () => {
     ]);
 
     // 3. Create Theatres
-    console.log('Seeding Theatres...');
     const theatres = await Theatre.create([
       {
         name: 'PVR IMAX Phoenix Marketcity',
@@ -173,7 +164,6 @@ const seedData = async () => {
     ]);
 
     // 4. Create Shows
-    console.log('Seeding Shows...');
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -232,7 +222,6 @@ const seedData = async () => {
     ]);
 
     // 5. Create Sample Booking
-    console.log('Seeding Sample Booking & Payment...');
     const booking = await Booking.create({
       user: demoUser._id,
       show: shows[0]._id,
@@ -250,24 +239,21 @@ const seedData = async () => {
       status: 'completed',
     });
 
-    console.log('========================================================');
-    console.log('✅ IMovies Database Seeded Successfully!');
-    console.log('--------------------------------------------------------');
-    console.log('🔑 Admin Credentials:');
-    console.log('   Email:    admin@imovies.com');
-    console.log('   Password: adminpassword123');
-    console.log('--------------------------------------------------------');
-    console.log('👤 Demo User Credentials:');
-    console.log('   Email:    rahul@example.com');
-    console.log('   Password: userpassword123');
-    console.log('========================================================');
-
-    process.exit(0);
+    console.log('✅ Initial Seed Complete: Movies, Theatres, Shows, and Demo Accounts ready.');
   } catch (err) {
     console.error('Seeding error:', err);
-    process.exit(1);
   }
 };
 
-seedData();
+if (require.main === module) {
+  require('dotenv').config();
+  mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/imoviesdb')
+    .then(() => seedData())
+    .then(() => process.exit(0))
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    });
+}
 
+module.exports = seedData;

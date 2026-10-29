@@ -60,9 +60,11 @@ const movieSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Indexes for fast searching and filtering
-movieSchema.index({ title: 'text', description: 'text' });
+// Indexes for fast searching and filtering with language_override: 'none'
+movieSchema.index(
+  { title: 'text', description: 'text' },
+  { default_language: 'english', language_override: 'none' }
+);
 movieSchema.index({ genre: 1, language: 1, releaseDate: -1 });
 
 module.exports = mongoose.model('Movie', movieSchema);
-
