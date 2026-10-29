@@ -109,4 +109,3 @@ The `seed.js` script automatically generates two pre-configured accounts:
 - **Bookings**: `POST /api/bookings`, `GET /api/bookings/my`, `PUT /api/bookings/:id/cancel`
 - **Payments**: `POST /api/payments/process`, `GET /api/payments/:id`
 - **Admin**: `GET /api/admin/dashboard`, `GET /api/admin/bookings`, `GET /api/admin/users`
-
