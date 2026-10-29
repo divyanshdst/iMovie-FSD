@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Database Design – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html">Overview</a></li>
+    <li><a href="environment.html">Setup</a></li>
+    <li><a href="database.html" class="active">Database</a></li>
+    <li><a href="development.html">Development</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html" class="active"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html"><span class="icon">💻</span> App Development</a>
+      <a href="security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>Database Design</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🗄️</span> 2. Database Design</h2>
+      <div class="info-box">
+        <strong>MongoDB – NoSQL Document Store</strong>
+        IMovies uses MongoDB to store all application data across dedicated collections. Each document is schema-validated using Mongoose ODM, ensuring data integrity and consistency.
+      </div>
+    </div>
+
+    <!-- COLLECTIONS -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📂</span> Collections Overview</h2>
+      <div class="schema-grid">
+
+        <div class="schema-card">
+          <div class="schema-card-header">👤 Users</div>
+          <div class="schema-card-body">
+            <div class="schema-field"><span>name</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>email</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>password</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>role</span><span class="schema-type">Enum</span></div>
+            <div class="schema-field"><span>phone</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>createdAt</span><span class="schema-type">Date</span></div>
+          </div>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">🎬 Movies</div>
+          <div class="schema-card-body">
+            <div class="schema-field"><span>title</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>genre</span><span class="schema-type">[String]</span></div>
+            <div class="schema-field"><span>language</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>duration</span><span class="schema-type">Number</span></div>
+            <div class="schema-field"><span>rating</span><span class="schema-type">Number</span></div>
+            <div class="schema-field"><span>poster</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>releaseDate</span><span class="schema-type">Date</span></div>
+          </div>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">🏛️ Theatres</div>
+          <div class="schema-card-body">
+            <div class="schema-field"><span>name</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>address</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>city</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>totalSeats</span><span class="schema-type">Number</span></div>
+            <div class="schema-field"><span>screens</span><span class="schema-type">Number</span></div>
+            <div class="schema-field"><span>owner</span><span class="schema-type">ObjectId</span></div>
+          </div>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">📅 Shows</div>
+          <div class="schema-card-body">
+            <div class="schema-field"><span>movie</span><span class="schema-type">ObjectId</span></div>
+            <div class="schema-field"><span>theatre</span><span class="schema-type">ObjectId</span></div>
+            <div class="schema-field"><span>date</span><span class="schema-type">Date</span></div>
+            <div class="schema-field"><span>time</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>ticketPrice</span><span class="schema-type">Number</span></div>
+            <div class="schema-field"><span>totalSeats</span><span class="schema-type">Number</span></div>
+          </div>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">💺 Seats</div>
+          <div class="schema-card-body">
+            <div class="schema-field"><span>show</span><span class="schema-type">ObjectId</span></div>
+            <div class="schema-field"><span>seatNumber</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>row</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>type</span><span class="schema-type">Enum</span></div>
+            <div class="schema-field"><span>isBooked</span><span class="schema-type">Boolean</span></div>
+          </div>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">🎟️ Bookings</div>
+          <div class="schema-card-body">
+            <div class="schema-field"><span>user</span><span class="schema-type">ObjectId</span></div>
+            <div class="schema-field"><span>show</span><span class="schema-type">ObjectId</span></div>
+            <div class="schema-field"><span>seats</span><span class="schema-type">[String]</span></div>
+            <div class="schema-field"><span>totalAmount</span><span class="schema-type">Number</span></div>
+            <div class="schema-field"><span>status</span><span class="schema-type">Enum</span></div>
+            <div class="schema-field"><span>bookedAt</span><span class="schema-type">Date</span></div>
+          </div>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">💳 Payments</div>
+          <div class="schema-card-body">
+            <div class="schema-field"><span>booking</span><span class="schema-type">ObjectId</span></div>
+            <div class="schema-field"><span>user</span><span class="schema-type">ObjectId</span></div>
+            <div class="schema-field"><span>amount</span><span class="schema-type">Number</span></div>
+            <div class="schema-field"><span>method</span><span class="schema-type">Enum</span></div>
+            <div class="schema-field"><span>status</span><span class="schema-type">Enum</span></div>
+            <div class="schema-field"><span>transactionId</span><span class="schema-type">String</span></div>
+          </div>
+        </div>
+
+        <div class="schema-card">
+          <div class="schema-card-header">🔔 Notifications</div>
+          <div class="schema-card-body">
+            <div class="schema-field"><span>user</span><span class="schema-type">ObjectId</span></div>
+            <div class="schema-field"><span>message</span><span class="schema-type">String</span></div>
+            <div class="schema-field"><span>type</span><span class="schema-type">Enum</span></div>
+            <div class="schema-field"><span>isRead</span><span class="schema-type">Boolean</span></div>
+            <div class="schema-field"><span>createdAt</span><span class="schema-type">Date</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MONGOOSE SCHEMAS -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">💾</span> Mongoose Schema Examples</h2>
+
+      <span class="code-label">models/User.js</span>
+      <pre><code>const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const userSchema = new mongoose.Schema({
+  name:     { type: String, required: true, trim: true },
+  email:    { type: String, required: true, unique: true, lowercase: true },
+  password: { type: String, required: true, minlength: 6 },
+  role:     { type: String, enum: ['user', 'admin'], default: 'user' },
+  phone:    { type: String },
+}, { timestamps: true });
+
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+module.exports = mongoose.model('User', userSchema);</code></pre>
+
+      <span class="code-label">models/Movie.js</span>
+      <pre><code>const mongoose = require('mongoose');
+
+const movieSchema = new mongoose.Schema({
+  title:       { type: String, required: true, trim: true },
+  description: { type: String },
+  genre:       [{ type: String }],
+  language:    { type: String, required: true },
+  duration:    { type: Number, required: true },   // minutes
+  rating:      { type: Number, default: 0, min: 0, max: 10 },
+  poster:      { type: String },
+  releaseDate: { type: Date, required: true },
+  cast:        [{ name: String, role: String }],
+  isActive:    { type: Boolean, default: true },
+}, { timestamps: true });
+
+// Index for search & filter
+movieSchema.index({ title: 'text', genre: 1, language: 1 });
+
+module.exports = mongoose.model('Movie', movieSchema);</code></pre>
+
+      <span class="code-label">models/Booking.js</span>
+      <pre><code>const mongoose = require('mongoose');
+
+const bookingSchema = new mongoose.Schema({
+  user:        { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  show:        { type: mongoose.Schema.Types.ObjectId, ref: 'Show', required: true },
+  seats:       [{ type: String, required: true }],
+  totalAmount: { type: Number, required: true },
+  status: {
+    type: String,
+    enum: ['pending', 'confirmed', 'cancelled'],
+    default: 'pending'
+  },
+}, { timestamps: true });
+
+module.exports = mongoose.model('Booking', bookingSchema);</code></pre>
+    </div>
+
+    <!-- RELATIONSHIPS -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🔗</span> Collection Relationships</h2>
+      <div class="info-box info">
+        <strong>Document References</strong>
+        MongoDB uses ObjectId references to link documents across collections. Mongoose's <code>populate()</code> method resolves these references at query time.
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>From</th><th>To</th><th>Type</th><th>Field</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Bookings</td><td>Users</td><td>Many-to-One</td><td>booking.user</td></tr>
+            <tr><td>Bookings</td><td>Shows</td><td>Many-to-One</td><td>booking.show</td></tr>
+            <tr><td>Shows</td><td>Movies</td><td>Many-to-One</td><td>show.movie</td></tr>
+            <tr><td>Shows</td><td>Theatres</td><td>Many-to-One</td><td>show.theatre</td></tr>
+            <tr><td>Seats</td><td>Shows</td><td>Many-to-One</td><td>seat.show</td></tr>
+            <tr><td>Payments</td><td>Bookings</td><td>One-to-One</td><td>payment.booking</td></tr>
+            <tr><td>Notifications</td><td>Users</td><td>Many-to-One</td><td>notification.user</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+

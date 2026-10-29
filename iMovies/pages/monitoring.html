@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monitoring & Optimization – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html">Overview</a></li>
+    <li><a href="environment.html">Setup</a></li>
+    <li><a href="database.html">Database</a></li>
+    <li><a href="development.html">Development</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html"><span class="icon">💻</span> App Development</a>
+      <a href="security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html" class="active"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>Monitoring & Optimization</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📊</span> 7. Monitoring & Optimization</h2>
+      <div class="info-box">
+        <strong>Scalable & Production-Ready</strong>
+        Optimize MongoDB queries with indexing, enable centralized error handling, apply pagination, and refactor services for maintainability and scalability.
+      </div>
+    </div>
+
+    <!-- INDEXING -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📑</span> MongoDB Indexing</h2>
+      <div class="info-box info">
+        <strong>Why Indexing Matters</strong>
+        Proper indexes dramatically reduce query time for movie search, show filtering, and booking history lookups — especially as data grows.
+      </div>
+      <span class="code-label">Indexes by Collection</span>
+      <pre><code>// Movie Search Index
+movieSchema.index({ title: 'text', description: 'text' });
+movieSchema.index({ genre: 1, language: 1, releaseDate: -1 });
+
+// Show Filtering Index
+showSchema.index({ movie: 1, theatre: 1, date: 1 });
+showSchema.index({ date: 1, time: 1 });
+
+// Booking History Index
+bookingSchema.index({ user: 1, createdAt: -1 });
+bookingSchema.index({ show: 1, status: 1 });
+
+// Seat Availability Index
+seatSchema.index({ show: 1, isBooked: 1 });</code></pre>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Collection</th><th>Index Field(s)</th><th>Use Case</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Movies</td><td>title (text), genre, language</td><td>Full-text search, genre/language filter</td></tr>
+            <tr><td>Shows</td><td>movie, theatre, date, time</td><td>Show listing by movie and location</td></tr>
+            <tr><td>Bookings</td><td>user, createdAt</td><td>User booking history (sorted)</td></tr>
+            <tr><td>Seats</td><td>show, isBooked</td><td>Real-time seat availability queries</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ERROR HANDLING -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🚨</span> Centralized Error Handling</h2>
+      <span class="code-label">middleware/errorHandler.js</span>
+      <pre><code>const errorHandler = (err, req, res, next) => {
+  let statusCode = res.statusCode !== 200 ? res.statusCode : 500;
+  let message    = err.message || 'Internal Server Error';
+
+  // Mongoose – CastError (invalid ObjectId)
+  if (err.name === 'CastError') {
+    statusCode = 404;
+    message    = `Resource not found`;
+  }
+
+  // Mongoose – Duplicate Key
+  if (err.code === 11000) {
+    statusCode = 400;
+    const field = Object.keys(err.keyValue)[0];
+    message    = `${field} already exists`;
+  }
+
+  // Mongoose – Validation Error
+  if (err.name === 'ValidationError') {
+    statusCode = 400;
+    message    = Object.values(err.errors).map(e => e.message).join(', ');
+  }
+
+  // JWT Error
+  if (err.name === 'JsonWebTokenError') {
+    statusCode = 401;
+    message    = 'Invalid token';
+  }
+
+  res.status(statusCode).json({
+    success: false,
+    message,
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
+  });
+};
+
+module.exports = errorHandler;</code></pre>
+
+      <span class="code-label">server.js – Register error handler (last middleware)</span>
+      <pre><code>const errorHandler = require('./middleware/errorHandler');
+
+// ... routes ...
+
+app.use(errorHandler);</code></pre>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📄</span> Pagination</h2>
+      <span class="code-label">Paginated Movie Listing</span>
+      <pre><code>exports.getMovies = async (req, res) => {
+  const page  = parseInt(req.query.page)  || 1;
+  const limit = parseInt(req.query.limit) || 12;
+  const skip  = (page - 1) * limit;
+
+  const query = { isActive: true };
+  if (req.query.genre)    query.genre    = req.query.genre;
+  if (req.query.language) query.language = req.query.language;
+
+  const [movies, total] = await Promise.all([
+    Movie.find(query).sort({ releaseDate: -1 }).skip(skip).limit(limit),
+    Movie.countDocuments(query),
+  ]);
+
+  res.json({
+    success:     true,
+    data:        movies,
+    pagination: {
+      page,
+      limit,
+      total,
+      pages: Math.ceil(total / limit),
+    },
+  });
+};</code></pre>
+    </div>
+
+    <!-- LOGGING -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📝</span> Logging</h2>
+      <span class="code-label">Install morgan for HTTP logging</span>
+      <pre><code>npm install morgan</code></pre>
+
+      <span class="code-label">server.js</span>
+      <pre><code>const morgan = require('morgan');
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+} else {
+  app.use(morgan('combined'));
+}</code></pre>
+    </div>
+
+    <!-- OPTIMIZATION CHECKLIST -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">✅</span> Optimization Checklist</h2>
+      <ul class="feature-list">
+        <li>Add MongoDB indexes for all frequently queried fields.</li>
+        <li>Use pagination for movie listings and booking logs.</li>
+        <li>Enable Express rate limiting on all API routes.</li>
+        <li>Implement centralized error handler as last Express middleware.</li>
+        <li>Use morgan for HTTP request logging in development and production.</li>
+        <li>Separate concerns — controllers, services, models, routes in distinct folders.</li>
+        <li>Cache frequently accessed data (e.g., movie list) using Redis (optional).</li>
+        <li>Use React.memo and lazy loading for large UI components.</li>
+        <li>Compress responses with Express compression middleware.</li>
+        <li>Enable GZIP on the production server or CDN layer.</li>
+      </ul>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+

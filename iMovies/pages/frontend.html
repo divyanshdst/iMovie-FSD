@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frontend Integration – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html">Overview</a></li>
+    <li><a href="environment.html">Setup</a></li>
+    <li><a href="database.html">Database</a></li>
+    <li><a href="development.html">Development</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html"><span class="icon">💻</span> App Development</a>
+      <a href="security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html" class="active"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>Frontend Integration</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🎨</span> 5. Frontend Integration</h2>
+      <div class="info-box">
+        <strong>React.js + Bootstrap UI</strong>
+        Build a responsive, component-driven interface with React.js. Use Redux for global state management, React Router for navigation, and Bootstrap for layout and components.
+      </div>
+    </div>
+
+    <!-- PAGES -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📄</span> Application Pages</h2>
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">🏠</div><div class="card-title">Home Page</div><div class="card-desc">Movie listings, featured films, search bar</div></div>
+        <div class="card"><div class="card-icon">🔐</div><div class="card-title">Auth Pages</div><div class="card-desc">Login and registration forms</div></div>
+        <div class="card"><div class="card-icon">🎬</div><div class="card-title">Movie Details</div><div class="card-desc">Poster, description, cast, show times</div></div>
+        <div class="card"><div class="card-icon">💺</div><div class="card-title">Seat Selection</div><div class="card-desc">Interactive seat map with live status</div></div>
+        <div class="card"><div class="card-icon">💳</div><div class="card-title">Checkout</div><div class="card-desc">Payment form and booking summary</div></div>
+        <div class="card"><div class="card-icon">✅</div><div class="card-title">Confirmation</div><div class="card-desc">Booking confirmation with ticket details</div></div>
+        <div class="card"><div class="card-icon">📜</div><div class="card-title">My Bookings</div><div class="card-desc">Past and upcoming bookings list</div></div>
+        <div class="card"><div class="card-icon">🛡️</div><div class="card-title">Admin Dashboard</div><div class="card-desc">Movie, show, and theatre management</div></div>
+      </div>
+    </div>
+
+    <!-- APP ROUTING -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🛣️</span> React Router Configuration</h2>
+      <span class="code-label">src/App.js</span>
+      <pre><code>import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
+import Navbar        from './components/Navbar';
+import Home          from './pages/Home';
+import Login         from './pages/Login';
+import Register      from './pages/Register';
+import MovieDetails  from './pages/MovieDetails';
+import SeatSelection from './pages/SeatSelection';
+import Checkout      from './pages/Checkout';
+import Confirmation  from './pages/Confirmation';
+import MyBookings    from './pages/MyBookings';
+import AdminPanel    from './pages/admin/AdminPanel';
+import PrivateRoute  from './components/PrivateRoute';
+import AdminRoute    from './components/AdminRoute';
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Navbar /&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/"              element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/login"         element={&lt;Login /&gt;} /&gt;
+        &lt;Route path="/register"      element={&lt;Register /&gt;} /&gt;
+        &lt;Route path="/movies/:id"    element={&lt;MovieDetails /&gt;} /&gt;
+        &lt;Route path="/seats/:showId" element={&lt;PrivateRoute&gt;&lt;SeatSelection /&gt;&lt;/PrivateRoute&gt;} /&gt;
+        &lt;Route path="/checkout"      element={&lt;PrivateRoute&gt;&lt;Checkout /&gt;&lt;/PrivateRoute&gt;} /&gt;
+        &lt;Route path="/confirmation"  element={&lt;PrivateRoute&gt;&lt;Confirmation /&gt;&lt;/PrivateRoute&gt;} /&gt;
+        &lt;Route path="/my-bookings"   element={&lt;PrivateRoute&gt;&lt;MyBookings /&gt;&lt;/PrivateRoute&gt;} /&gt;
+        &lt;Route path="/admin/*"       element={&lt;AdminRoute&gt;&lt;AdminPanel /&gt;&lt;/AdminRoute&gt;} /&gt;
+      &lt;/Routes&gt;
+      &lt;ToastContainer position="top-right" autoClose={3000} /&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}
+
+export default App;</code></pre>
+    </div>
+
+    <!-- REDUX -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🗃️</span> Redux State Management</h2>
+      <span class="code-label">redux/slices/authSlice.js</span>
+      <pre><code>import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const login = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
+  try {
+    const { data } = await axios.post('/api/auth/login', credentials);
+    localStorage.setItem('token', data.token);
+    return data.user;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data.message);
+  }
+});
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState: { user: null, token: localStorage.getItem('token'), loading: false, error: null },
+  reducers: {
+    logout: (state) => {
+      state.user  = null;
+      state.token = null;
+      localStorage.removeItem('token');
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.pending,   (state) => { state.loading = true; state.error = null; })
+      .addCase(login.fulfilled, (state, action) => { state.loading = false; state.user = action.payload; })
+      .addCase(login.rejected,  (state, action) => { state.loading = false; state.error = action.payload; });
+  },
+});
+
+export const { logout } = authSlice.actions;
+export default authSlice.reducer;</code></pre>
+    </div>
+
+    <!-- SEAT SELECTION -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">💺</span> Real-Time Seat Selection</h2>
+      <span class="code-label">pages/SeatSelection.jsx</span>
+      <pre><code>import { useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
+import axios from 'axios';
+
+const socket = io('http://localhost:5000');
+
+export default function SeatSelection({ showId }) {
+  const [seats, setSeats] = useState([]);
+  const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    // Fetch seats from server
+    axios.get(`/api/shows/${showId}/seats`)
+      .then(res => setSeats(res.data.data));
+
+    // Listen to real-time seat updates
+    socket.on('seat-updated', ({ seatNumber, isBooked }) => {
+      setSeats(prev => prev.map(s =>
+        s.seatNumber === seatNumber ? { ...s, isBooked } : s
+      ));
+    });
+
+    return () => socket.off('seat-updated');
+  }, [showId]);
+
+  const toggleSeat = (seat) => {
+    if (seat.isBooked) return;
+    const isSelected = selected.includes(seat.seatNumber);
+    const updated = isSelected
+      ? selected.filter(s => s !== seat.seatNumber)
+      : [...selected, seat.seatNumber];
+
+    setSelected(updated);
+    socket.emit('seat-selected', { seatNumber: seat.seatNumber, isBooked: !isSelected });
+  };
+
+  return (
+    &lt;div className="seat-map"&gt;
+      {seats.map(seat => (
+        &lt;button
+          key={seat.seatNumber}
+          className={`seat ${seat.isBooked ? 'booked' : selected.includes(seat.seatNumber) ? 'selected' : 'available'}`}
+          onClick={() => toggleSeat(seat)}
+          disabled={seat.isBooked}
+        &gt;
+          {seat.seatNumber}
+        &lt;/button&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+

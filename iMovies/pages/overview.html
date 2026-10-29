@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Overview – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html" class="active">Overview</a></li>
+    <li><a href="environment.html">Setup</a></li>
+    <li><a href="database.html">Database</a></li>
+    <li><a href="development.html">Development</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html" class="active"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html"><span class="icon">💻</span> App Development</a>
+      <a href="security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>Project Overview</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📋</span> Project Overview</h2>
+      <div class="info-box">
+        <strong>IMovies – Cinema Booking Platform</strong>
+        IMovies is a seamless online platform that enhances the cinema experience by allowing users to browse movies, select showtimes, and reserve seats with real-time availability tracking. Built with Express.js and MongoDB, it leverages a robust client-server architecture to ensure efficient data management and smooth performance.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🎯</span> Project Objectives</h2>
+      <ul class="feature-list">
+        <li>Build a production-ready full-stack MERN IMovies application.</li>
+        <li>Implement secure role-based authentication and booking workflows.</li>
+        <li>Develop real-time seat management and payment integration systems.</li>
+        <li>Design a responsive and user-friendly interface using React.js.</li>
+        <li>Gain practical experience in backend architecture and REST API development.</li>
+        <li>Understand real-world cinema scheduling, booking management, and transaction workflows.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🛠️</span> Skills Required</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Skill</th>
+              <th>Category</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>HTML</td><td>Frontend</td><td>Structure and markup of web pages</td></tr>
+            <tr><td>CSS</td><td>Frontend</td><td>Styling and responsive layout</td></tr>
+            <tr><td>JavaScript</td><td>Language</td><td>Core programming for client &amp; server logic</td></tr>
+            <tr><td>React.js</td><td>Frontend Library</td><td>Dynamic UI components and state management</td></tr>
+            <tr><td>Node.js</td><td>Backend Runtime</td><td>Server-side JavaScript execution</td></tr>
+            <tr><td>Express.js</td><td>Backend Framework</td><td>RESTful API routing and middleware</td></tr>
+            <tr><td>MongoDB</td><td>Database</td><td>NoSQL data storage and querying</td></tr>
+            <tr><td>Async JavaScript</td><td>Core Concept</td><td>Promises, async/await, event loop</td></tr>
+            <tr><td>JWT</td><td>Security</td><td>Token-based authentication</td></tr>
+            <tr><td>Bootstrap</td><td>UI Framework</td><td>Responsive grid and component library</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🏗️</span> Architecture Overview</h2>
+      <div class="info-box info">
+        <strong>Client-Server Architecture (MERN Stack)</strong>
+        The application follows a three-tier architecture: React.js (Presentation) → Express.js + Node.js (Business Logic) → MongoDB (Data Layer).
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🖥️</div>
+          <div class="card-title">Frontend – React.js</div>
+          <div class="card-desc">SPA with Redux state management, React Router, and Bootstrap for responsive design.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <div class="card-title">Backend – Express.js</div>
+          <div class="card-desc">RESTful APIs with middleware for auth, validation, rate limiting, and error handling.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍃</div>
+          <div class="card-title">Database – MongoDB</div>
+          <div class="card-desc">NoSQL with Mongoose ODM for schema definition, indexing, and data relationships.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Real-Time – Socket.io</div>
+          <div class="card-desc">WebSocket-based live seat availability updates for concurrent users.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📦</span> Core Modules</h2>
+      <ul class="step-list">
+        <li><div class="step-num">1</div><div><strong>User Authentication</strong> — Registration, login, JWT tokens, and session management</div></li>
+        <li><div class="step-num">2</div><div><strong>Movie Management</strong> — Browse, search, and filter movies with genre/language/date filters</div></li>
+        <li><div class="step-num">3</div><div><strong>Show Scheduling</strong> — Theatre-wise show listings with timing and pricing details</div></li>
+        <li><div class="step-num">4</div><div><strong>Seat Selection</strong> — Interactive seat map with real-time availability via Socket.io</div></li>
+        <li><div class="step-num">5</div><div><strong>Booking & Payment</strong> — End-to-end ticket booking with payment processing and confirmation</div></li>
+        <li><div class="step-num">6</div><div><strong>Booking History</strong> — View upcoming and past bookings with cancellation support</div></li>
+        <li><div class="step-num">7</div><div><strong>Admin Panel</strong> — Manage movies, shows, theatres, and user bookings</div></li>
+      </ul>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+

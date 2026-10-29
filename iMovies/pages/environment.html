@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Environment Setup – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html">Overview</a></li>
+    <li><a href="environment.html" class="active">Setup</a></li>
+    <li><a href="database.html">Database</a></li>
+    <li><a href="development.html">Development</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html" class="active"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html"><span class="icon">💻</span> App Development</a>
+      <a href="security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>Environment Setup</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">⚙️</span> 1. Environment Setup</h2>
+      <div class="info-box">
+        <strong>Before You Begin</strong>
+        Install Node.js (v16+), npm, and MongoDB. Set up version control with Git and API testing with Postman. Follow the steps below to get both backend and frontend ready.
+      </div>
+    </div>
+
+    <!-- PREREQUISITES -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📋</span> Prerequisites</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Tool</th><th>Version</th><th>Download</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Node.js</td><td>v16 or above</td><td><a href="https://nodejs.org" target="_blank">nodejs.org</a></td></tr>
+            <tr><td>npm</td><td>v8 or above</td><td>Bundled with Node.js</td></tr>
+            <tr><td>MongoDB</td><td>v6+</td><td><a href="https://www.mongodb.com/try/download/community" target="_blank">mongodb.com</a></td></tr>
+            <tr><td>Git</td><td>Latest</td><td><a href="https://git-scm.com" target="_blank">git-scm.com</a></td></tr>
+            <tr><td>Postman</td><td>Latest</td><td><a href="https://postman.com" target="_blank">postman.com</a></td></tr>
+            <tr><td>VS Code</td><td>Latest</td><td><a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PROJECT STRUCTURE -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📁</span> Project Structure</h2>
+      <span class="code-label">Folder Layout</span>
+      <pre><code>imovies/
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── movieController.js
+│   │   ├── bookingController.js
+│   │   └── adminController.js
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   │   └── rateLimiter.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Movie.js
+│   │   ├── Theatre.js
+│   │   ├── Show.js
+│   │   ├── Booking.js
+│   │   └── Payment.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── movieRoutes.js
+│   │   └── bookingRoutes.js
+│   ├── .env
+│   ├── server.js
+│   └── package.json
+│
+└── frontend/
+    ├── public/
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── redux/
+    │   ├── services/
+    │   ├── App.js
+    │   └── index.js
+    └── package.json</code></pre>
+    </div>
+
+    <!-- BACKEND SETUP -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🚂</span> Backend Setup (Express.js)</h2>
+
+      <span class="code-label">Step 1 – Initialize the Backend</span>
+      <pre><code>mkdir imovies && cd imovies
+mkdir backend && cd backend
+npm init -y</code></pre>
+
+      <span class="code-label">Step 2 – Install Backend Dependencies</span>
+      <pre><code>npm install express mongoose bcryptjs jsonwebtoken cors dotenv multer socket.io
+
+# Dev dependencies
+npm install --save-dev nodemon</code></pre>
+
+      <span class="code-label">Step 3 – server.js (Entry Point)</span>
+      <pre><code>const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
+require('dotenv').config();
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, { cors: { origin: '*' } });
+
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use('/api/auth',    require('./routes/authRoutes'));
+app.use('/api/movies',  require('./routes/movieRoutes'));
+app.use('/api/booking', require('./routes/bookingRoutes'));
+
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error(err));
+
+// Socket.io – Real-time seat updates
+io.on('connection', (socket) => {
+  socket.on('seat-selected', (data) => {
+    socket.broadcast.emit('seat-updated', data);
+  });
+});
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></pre>
+    </div>
+
+    <!-- FRONTEND SETUP -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">⚛️</span> Frontend Setup (React.js)</h2>
+
+      <span class="code-label">Step 1 – Create React App</span>
+      <pre><code>cd ..  # back to imovies/
+npx create-react-app frontend
+cd frontend</code></pre>
+
+      <span class="code-label">Step 2 – Install Frontend Dependencies</span>
+      <pre><code>npm install axios react-router-dom redux react-redux react-toastify bootstrap socket.io-client</code></pre>
+
+      <span class="code-label">Step 3 – src/index.js</span>
+      <pre><code>import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './index.css';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  &lt;Provider store={store}&gt;
+    &lt;App /&gt;
+  &lt;/Provider&gt;
+);</code></pre>
+    </div>
+
+    <!-- ENV CONFIG -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🔧</span> Environment Configuration</h2>
+      <span class="code-label">backend/.env</span>
+      <pre><code>MONGO_URI=mongodb://localhost:27017/imoviesdb
+JWT_SECRET=your_super_secret_jwt_key_here
+PORT=5000
+NODE_ENV=development</code></pre>
+
+      <div class="info-box warning">
+        <strong>⚠️ Security Note</strong>
+        Never commit your <code>.env</code> file to version control. Add it to <code>.gitignore</code> before your first commit.
+      </div>
+
+      <span class="code-label">.gitignore</span>
+      <pre><code>node_modules/
+.env
+build/
+dist/
+.DS_Store</code></pre>
+    </div>
+
+    <!-- PACKAGE.JSON -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📦</span> Scripts Reference</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Command</th><th>Location</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>npm run dev</code></td><td>backend/</td><td>Start backend with nodemon (hot reload)</td></tr>
+            <tr><td><code>npm start</code></td><td>backend/</td><td>Start backend in production mode</td></tr>
+            <tr><td><code>npm start</code></td><td>frontend/</td><td>Start React development server</td></tr>
+            <tr><td><code>npm run build</code></td><td>frontend/</td><td>Build React for production</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+

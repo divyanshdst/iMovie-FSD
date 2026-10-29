@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Application Development – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html">Overview</a></li>
+    <li><a href="environment.html">Setup</a></li>
+    <li><a href="database.html">Database</a></li>
+    <li><a href="development.html" class="active">Development</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html" class="active"><span class="icon">💻</span> App Development</a>
+      <a href="security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>Application Development</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">💻</span> 3. Application Development</h2>
+      <div class="info-box">
+        <strong>Full CRUD & Module Architecture</strong>
+        Develop all modules using MVC pattern — Controllers handle business logic, Models define data structure, and Routes expose REST API endpoints.
+      </div>
+    </div>
+
+    <!-- MODULES -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📦</span> Application Modules</h2>
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">🔐</div><div class="card-title">User Auth</div><div class="card-desc">Registration, login, JWT tokens</div></div>
+        <div class="card"><div class="card-icon">🎬</div><div class="card-title">Movie Search</div><div class="card-desc">Filter by genre, language, date</div></div>
+        <div class="card"><div class="card-icon">🗓️</div><div class="card-title">Show Selection</div><div class="card-desc">Theatre-wise show schedules</div></div>
+        <div class="card"><div class="card-icon">🎟️</div><div class="card-title">Ticket Booking</div><div class="card-desc">End-to-end reservation flow</div></div>
+        <div class="card"><div class="card-icon">💺</div><div class="card-title">Seat Selection</div><div class="card-desc">Real-time availability map</div></div>
+        <div class="card"><div class="card-icon">📜</div><div class="card-title">Booking History</div><div class="card-desc">View and cancel past bookings</div></div>
+        <div class="card"><div class="card-icon">🛡️</div><div class="card-title">Admin Panel</div><div class="card-desc">Manage movies, shows, theatres</div></div>
+        <div class="card"><div class="card-icon">💳</div><div class="card-title">Payments</div><div class="card-desc">Process and verify transactions</div></div>
+      </div>
+    </div>
+
+    <!-- REST API -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🔌</span> REST API Endpoints</h2>
+
+      <div class="info-box info"><strong>Auth Routes — /api/auth</strong></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge badge-success">POST</span></td><td>/register</td><td>Register new user</td><td>No</td></tr>
+            <tr><td><span class="badge badge-success">POST</span></td><td>/login</td><td>Login and get JWT</td><td>No</td></tr>
+            <tr><td><span class="badge badge-info">GET</span></td><td>/profile</td><td>Get current user profile</td><td>Yes</td></tr>
+            <tr><td><span class="badge badge-warning">PUT</span></td><td>/profile</td><td>Update profile</td><td>Yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box info"><strong>Movie Routes — /api/movies</strong></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge badge-info">GET</span></td><td>/</td><td>Get all movies (with filters)</td><td>No</td></tr>
+            <tr><td><span class="badge badge-info">GET</span></td><td>/:id</td><td>Get movie details</td><td>No</td></tr>
+            <tr><td><span class="badge badge-success">POST</span></td><td>/</td><td>Add new movie</td><td>Admin</td></tr>
+            <tr><td><span class="badge badge-warning">PUT</span></td><td>/:id</td><td>Update movie details</td><td>Admin</td></tr>
+            <tr><td><span class="badge badge-danger" style="background:#dc3545;color:#fff;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;">DELETE</span></td><td>/:id</td><td>Delete a movie</td><td>Admin</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box info"><strong>Booking Routes — /api/bookings</strong></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Auth</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge badge-success">POST</span></td><td>/</td><td>Create new booking</td><td>User</td></tr>
+            <tr><td><span class="badge badge-info">GET</span></td><td>/my</td><td>Get user's bookings</td><td>User</td></tr>
+            <tr><td><span class="badge badge-info">GET</span></td><td>/:id</td><td>Get booking by ID</td><td>User</td></tr>
+            <tr><td><span class="badge badge-warning">PUT</span></td><td>/:id/cancel</td><td>Cancel a booking</td><td>User</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CONTROLLER EXAMPLE -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">⚙️</span> Controller Examples</h2>
+
+      <span class="code-label">controllers/movieController.js</span>
+      <pre><code>const Movie = require('../models/Movie');
+
+// GET /api/movies — with genre, language, date filters
+exports.getMovies = async (req, res) => {
+  try {
+    const { genre, language, search } = req.query;
+    const query = { isActive: true };
+
+    if (genre)    query.genre    = genre;
+    if (language) query.language = language;
+    if (search)   query.$text    = { $search: search };
+
+    const movies = await Movie.find(query)
+      .sort({ releaseDate: -1 })
+      .limit(20);
+
+    res.json({ success: true, count: movies.length, data: movies });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// POST /api/movies — admin only
+exports.createMovie = async (req, res) => {
+  try {
+    const movie = await Movie.create(req.body);
+    res.status(201).json({ success: true, data: movie });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+};</code></pre>
+
+      <span class="code-label">controllers/bookingController.js</span>
+      <pre><code>const Booking = require('../models/Booking');
+const Show    = require('../models/Show');
+
+// POST /api/bookings — create booking
+exports.createBooking = async (req, res) => {
+  try {
+    const { showId, seats } = req.body;
+
+    // Check show exists and seats are available
+    const show = await Show.findById(showId);
+    if (!show) return res.status(404).json({ message: 'Show not found' });
+
+    const alreadyBooked = show.bookedSeats.some(s => seats.includes(s));
+    if (alreadyBooked) return res.status(400).json({ message: 'Some seats already booked' });
+
+    const totalAmount = seats.length * show.ticketPrice;
+
+    const booking = await Booking.create({
+      user: req.user._id,
+      show: showId,
+      seats,
+      totalAmount,
+      status: 'confirmed',
+    });
+
+    // Mark seats as booked in show
+    show.bookedSeats.push(...seats);
+    await show.save();
+
+    res.status(201).json({ success: true, data: booking });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};</code></pre>
+    </div>
+
+    <!-- ROUTES EXAMPLE -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🛣️</span> Routes Example</h2>
+      <span class="code-label">routes/movieRoutes.js</span>
+      <pre><code>const express = require('express');
+const router  = express.Router();
+const { protect, adminOnly } = require('../middleware/authMiddleware');
+const {
+  getMovies, getMovie, createMovie, updateMovie, deleteMovie
+} = require('../controllers/movieController');
+
+router.route('/')
+  .get(getMovies)
+  .post(protect, adminOnly, createMovie);
+
+router.route('/:id')
+  .get(getMovie)
+  .put(protect, adminOnly, updateMovie)
+  .delete(protect, adminOnly, deleteMovie);
+
+module.exports = router;</code></pre>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+

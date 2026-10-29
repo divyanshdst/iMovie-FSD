@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IMovies – Cinema Booking Platform</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="pages/overview.html">Overview</a></li>
+    <li><a href="pages/environment.html">Setup</a></li>
+    <li><a href="pages/database.html">Database</a></li>
+    <li><a href="pages/development.html">Development</a></li>
+    <li><a href="pages/security.html">Security</a></li>
+    <li><a href="pages/requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<!-- ===== LAYOUT ===== -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="index.html" class="active"><span class="icon">🏠</span> Home</a>
+      <a href="pages/overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="pages/environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="pages/database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="pages/development.html"><span class="icon">💻</span> App Development</a>
+      <a href="pages/security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="pages/frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="pages/testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="pages/monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="pages/requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="pages/outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-text">
+        <h1>i<span>Movies</span><br/>Cinema Booking Platform</h1>
+        <p>A seamless online platform that enhances the cinema experience — browse movies, select showtimes, and reserve seats with real-time availability tracking.</p>
+        <div class="hero-badge-group">
+          <span class="badge badge-accent">MERN Stack</span>
+          <span class="badge badge-success">Full Stack</span>
+          <span class="badge badge-info">Real-Time</span>
+          <span class="badge badge-warning">JWT Auth</span>
+          <span class="badge badge-outline">v1.0.0</span>
+        </div>
+      </div>
+      <div class="hero-visual">🎥</div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📌</span> About the Project</h2>
+      <div class="info-box">
+        <strong>What is IMovies?</strong>
+        IMovies is a full-stack cinema management system that enables users to browse movies, explore showtimes, select seats, and book tickets seamlessly. Built using the MERN Stack (MongoDB, Express.js, React.js, Node.js), it incorporates secure authentication, real-time seat availability tracking, and an intuitive interface for a smooth and personalized cinema booking experience.
+      </div>
+      <div class="info-box info">
+        <strong>Built With</strong>
+        MongoDB · Express.js · React.js · Node.js · JWT · Bootstrap · Socket.io · bcrypt.js
+      </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🛠️</span> Technology Stack</h2>
+      <div class="tech-stack">
+        <div class="tech-pill"><span>⚛️</span> React.js</div>
+        <div class="tech-pill"><span>🟩</span> Node.js</div>
+        <div class="tech-pill"><span>🚂</span> Express.js</div>
+        <div class="tech-pill"><span>🍃</span> MongoDB</div>
+        <div class="tech-pill"><span>🔑</span> JWT</div>
+        <div class="tech-pill"><span>🎨</span> Bootstrap</div>
+        <div class="tech-pill"><span>🔐</span> bcrypt.js</div>
+        <div class="tech-pill"><span>⚡</span> Socket.io</div>
+        <div class="tech-pill"><span>🌐</span> Axios</div>
+        <div class="tech-pill"><span>📦</span> Redux</div>
+      </div>
+    </div>
+
+    <!-- KEY FEATURES -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">✨</span> Key Features</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🔐</div>
+          <div class="card-title">Secure Authentication</div>
+          <div class="card-desc">JWT-based login, registration, and role-based access control for users and admins.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎬</div>
+          <div class="card-title">Movie Browser</div>
+          <div class="card-desc">Search and filter movies by genre, language, theatre, location, and date.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💺</div>
+          <div class="card-title">Real-Time Seats</div>
+          <div class="card-desc">Live seat availability tracking using Socket.io for accurate booking.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💳</div>
+          <div class="card-title">Ticket Booking</div>
+          <div class="card-desc">End-to-end booking with payment processing and confirmation.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Admin Panel</div>
+          <div class="card-desc">Manage movies, theatres, shows, and bookings from a dedicated dashboard.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <div class="card-title">Responsive UI</div>
+          <div class="card-desc">Mobile-friendly interface built with React.js and Bootstrap.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK NAVIGATION -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🗺️</span> Documentation Index</h2>
+      <ul class="step-list">
+        <li>
+          <div class="step-num">1</div>
+          <div>
+            <strong><a href="pages/environment.html">Environment Setup</a></strong><br/>
+            <span style="font-size:13px;color:#7777aa;">Install Node.js, MongoDB, configure .env, set up Git and Postman.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div>
+            <strong><a href="pages/database.html">Database Design</a></strong><br/>
+            <span style="font-size:13px;color:#7777aa;">MongoDB collections, schema design, relationships between entities.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div>
+            <strong><a href="pages/development.html">Application Development</a></strong><br/>
+            <span style="font-size:13px;color:#7777aa;">CRUD operations, modules, routing, and server-side validation.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div>
+            <strong><a href="pages/security.html">Role-Based Security</a></strong><br/>
+            <span style="font-size:13px;color:#7777aa;">JWT auth, bcrypt passwords, middleware protection, API rate limiting.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">5</div>
+          <div>
+            <strong><a href="pages/frontend.html">Frontend Integration</a></strong><br/>
+            <span style="font-size:13px;color:#7777aa;">React.js UI, seat selection, admin dashboard, toast notifications.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">6</div>
+          <div>
+            <strong><a href="pages/testing.html">Testing & Validation</a></strong><br/>
+            <span style="font-size:13px;color:#7777aa;">Auth workflows, API testing, seat and payment validation.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">7</div>
+          <div>
+            <strong><a href="pages/monitoring.html">Monitoring & Optimization</a></strong><br/>
+            <span style="font-size:13px;color:#7777aa;">Indexing, rate limiting, pagination, error handling, scalability.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+
+</body>
+</html>
+

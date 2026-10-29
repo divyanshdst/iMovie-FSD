@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>System Requirements – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html">Overview</a></li>
+    <li><a href="environment.html">Setup</a></li>
+    <li><a href="database.html">Database</a></li>
+    <li><a href="development.html">Development</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="requirements.html" class="active">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html"><span class="icon">💻</span> App Development</a>
+      <a href="security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html" class="active"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>System Requirements</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🖥️</span> System Requirements</h2>
+      <div class="info-box">
+        <strong>Prerequisites for Development</strong>
+        To ensure smooth development, deployment, and usage of IMovies, certain system prerequisites must be met. These are categorized into software, setup, and hardware specifications.
+      </div>
+    </div>
+
+    <!-- SOFTWARE -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">💿</span> 1. Software Requirements</h2>
+      <div class="info-box info">
+        Essential tools and platforms required to develop, test, and run the application.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Software</th><th>Version</th><th>Purpose</th><th>Download</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Operating System</td>
+              <td>Win 10/11, macOS, Linux</td>
+              <td>Cross-platform development environment</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Node.js</td>
+              <td>v16 or above</td>
+              <td>Runtime for backend logic and API routing</td>
+              <td><a href="https://nodejs.org" target="_blank">nodejs.org ↗</a></td>
+            </tr>
+            <tr>
+              <td>npm</td>
+              <td>v8 or above</td>
+              <td>Package manager for all dependencies</td>
+              <td>Bundled with Node.js</td>
+            </tr>
+            <tr>
+              <td>React.js</td>
+              <td>v18+</td>
+              <td>JavaScript library for building dynamic UIs</td>
+              <td><a href="https://reactjs.org" target="_blank">reactjs.org ↗</a></td>
+            </tr>
+            <tr>
+              <td>MongoDB</td>
+              <td>v6+</td>
+              <td>NoSQL database for all application data</td>
+              <td><a href="https://www.mongodb.com/try/download/community" target="_blank">mongodb.com ↗</a></td>
+            </tr>
+            <tr>
+              <td>Express.js</td>
+              <td>v4+</td>
+              <td>Lightweight framework for RESTful APIs</td>
+              <td><a href="https://expressjs.com" target="_blank">expressjs.com ↗</a></td>
+            </tr>
+            <tr>
+              <td>Git</td>
+              <td>Latest</td>
+              <td>Version control and collaboration</td>
+              <td><a href="https://git-scm.com" target="_blank">git-scm.com ↗</a></td>
+            </tr>
+            <tr>
+              <td>Postman</td>
+              <td>Latest</td>
+              <td>Testing and debugging REST APIs</td>
+              <td><a href="https://postman.com" target="_blank">postman.com ↗</a></td>
+            </tr>
+            <tr>
+              <td>Visual Studio Code</td>
+              <td>Latest</td>
+              <td>Preferred code editor with terminal and Git</td>
+              <td><a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com ↗</a></td>
+            </tr>
+            <tr>
+              <td>Browser</td>
+              <td>Chrome / Firefox (Latest)</td>
+              <td>Rendering and testing the UI in real time</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- HARDWARE -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">⚙️</span> 2. Hardware Requirements</h2>
+      <div class="info-box info">
+        Minimum and recommended specifications to support development and usage.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Component</th><th>Minimum</th><th>Recommended</th><th>Reason</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Processor</td>
+              <td>Intel i5 (8th Gen) / AMD Ryzen 5</td>
+              <td>Intel i7 / AMD Ryzen 7</td>
+              <td>Fast compilation and multitasking</td>
+            </tr>
+            <tr>
+              <td>RAM</td>
+              <td>8 GB</td>
+              <td>16 GB</td>
+              <td>Handles dev servers, IDEs, and browser simultaneously</td>
+            </tr>
+            <tr>
+              <td>Storage</td>
+              <td>1 GB free</td>
+              <td>10 GB+</td>
+              <td>Node modules, MongoDB data, project files</td>
+            </tr>
+            <tr>
+              <td>Display</td>
+              <td>1366 × 768</td>
+              <td>1920 × 1080</td>
+              <td>Optimal coding experience and UI layout visualization</td>
+            </tr>
+            <tr>
+              <td>Internet</td>
+              <td>Stable broadband</td>
+              <td>10 Mbps+</td>
+              <td>Package downloads, API integrations</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🧰</span> 3. Recommended VS Code Extensions</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">ES7+ React Snippets</div>
+          <div class="card-desc">Fast code snippets for React components and hooks</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">Prettier</div>
+          <div class="card-desc">Automatic code formatting on save</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <div class="card-title">ESLint</div>
+          <div class="card-desc">Linting and code quality checks</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍃</div>
+          <div class="card-title">MongoDB for VS Code</div>
+          <div class="card-desc">Browse and query MongoDB directly in VS Code</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🐙</div>
+          <div class="card-title">GitLens</div>
+          <div class="card-desc">Enhanced Git history and blame annotations</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌈</div>
+          <div class="card-title">Thunder Client</div>
+          <div class="card-desc">Lightweight REST API client inside VS Code</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+

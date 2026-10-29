@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Security & Auth – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html">Overview</a></li>
+    <li><a href="environment.html">Setup</a></li>
+    <li><a href="database.html">Database</a></li>
+    <li><a href="development.html">Development</a></li>
+    <li><a href="security.html" class="active">Security</a></li>
+    <li><a href="requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html"><span class="icon">💻</span> App Development</a>
+      <a href="security.html" class="active"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>Security & Authentication</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🔒</span> 4. Role-Based Security</h2>
+      <div class="info-box">
+        <strong>JWT + bcrypt.js Security Architecture</strong>
+        IMovies uses JSON Web Tokens for stateless authentication and bcrypt.js for password hashing. Role-based access control (RBAC) protects admin and user-specific routes.
+      </div>
+    </div>
+
+    <!-- ROLES -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">👥</span> User Roles</h2>
+      <div class="role-grid">
+        <div class="role-box">
+          <h4>👤 User</h4>
+          <ul class="feature-list">
+            <li>Register and login</li>
+            <li>Browse movies and showtimes</li>
+            <li>Select seats and book tickets</li>
+            <li>View booking history</li>
+            <li>Cancel bookings</li>
+            <li>Manage personal profile</li>
+          </ul>
+        </div>
+        <div class="role-box">
+          <h4>🛡️ Admin</h4>
+          <ul class="feature-list">
+            <li>All user permissions</li>
+            <li>Add / edit / delete movies</li>
+            <li>Manage theatres and shows</li>
+            <li>View all bookings</li>
+            <li>Access admin dashboard</li>
+            <li>Manage user accounts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECURITY FEATURES -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🛡️</span> Security Features</h2>
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">🔑</div><div class="card-title">JWT Authentication</div><div class="card-desc">Stateless tokens with expiry, signed using a secret key.</div></div>
+        <div class="card"><div class="card-icon">🔐</div><div class="card-title">Password Hashing</div><div class="card-desc">bcrypt.js with salt rounds for secure password storage.</div></div>
+        <div class="card"><div class="card-icon">🛡️</div><div class="card-title">Protected Routes</div><div class="card-desc">Middleware validates JWT before allowing access to APIs.</div></div>
+        <div class="card"><div class="card-icon">⏱️</div><div class="card-title">Rate Limiting</div><div class="card-desc">Express-rate-limit prevents brute force and DDoS attacks.</div></div>
+        <div class="card"><div class="card-icon">🌐</div><div class="card-title">CORS Control</div><div class="card-desc">Whitelist allowed origins for cross-origin requests.</div></div>
+        <div class="card"><div class="card-icon">🔒</div><div class="card-title">Role Guards</div><div class="card-desc">adminOnly middleware blocks non-admin users from admin APIs.</div></div>
+      </div>
+    </div>
+
+    <!-- AUTH MIDDLEWARE -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">⚙️</span> Auth Middleware</h2>
+
+      <span class="code-label">middleware/authMiddleware.js</span>
+      <pre><code>const jwt  = require('jsonwebtoken');
+const User = require('../models/User');
+
+// Protect — require valid JWT
+exports.protect = async (req, res, next) => {
+  let token;
+
+  if (req.headers.authorization &&
+      req.headers.authorization.startsWith('Bearer ')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return res.status(401).json({ message: 'Not authorized – no token' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id).select('-password');
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: 'Token invalid or expired' });
+  }
+};
+
+// AdminOnly — require admin role
+exports.adminOnly = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    return next();
+  }
+  res.status(403).json({ message: 'Access denied – admins only' });
+};</code></pre>
+    </div>
+
+    <!-- TOKEN GENERATION -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🔑</span> JWT Token Generation</h2>
+
+      <span class="code-label">controllers/authController.js – Login</span>
+      <pre><code>const jwt    = require('jsonwebtoken');
+const User   = require('../models/User');
+const bcrypt = require('bcryptjs');
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      success: true,
+      token,
+      user: {
+        _id:   user._id,
+        name:  user.name,
+        email: user.email,
+        role:  user.role,
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};</code></pre>
+    </div>
+
+    <!-- RATE LIMITING -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">⏱️</span> API Rate Limiting</h2>
+
+      <span class="code-label">middleware/rateLimiter.js</span>
+      <pre><code>const rateLimit = require('express-rate-limit');
+
+// General API limiter
+exports.apiLimiter = rateLimit({
+  windowMs:  15 * 60 * 1000, // 15 minutes
+  max:       100,             // max 100 requests per window
+  message:   { message: 'Too many requests, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Strict limiter for auth routes
+exports.authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max:       10,
+  message:   { message: 'Too many login attempts.' },
+});</code></pre>
+
+      <span class="code-label">server.js – Apply limiters</span>
+      <pre><code>const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
+
+app.use('/api/',      apiLimiter);
+app.use('/api/auth/', authLimiter);</code></pre>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+

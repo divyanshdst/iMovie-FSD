@@ -1,0 +1,292 @@
+/* ========================================================
+   IMovies - Light CSS & Solid Colors Design System
+   ======================================================== */
+
+:root {
+  --primary: #1a1a2e;
+  --primary-light: #252542;
+  --accent: #e94560;
+  --accent-hover: #d1334d;
+  --bg-light: #f4f6fb;
+  --white: #ffffff;
+  --card-bg: #ffffff;
+  --text-dark: #1a1a2e;
+  --text-muted: #555577;
+  --border: #dde2f0;
+  --success: #28a745;
+  --warning: #e0a800;
+  --danger: #dc3545;
+  --seat-available: #e2e8f0;
+  --seat-selected: #e94560;
+  --seat-booked: #718096;
+  --seat-vip: #ffd700;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
+/* Navbar */
+.app-navbar {
+  background-color: var(--primary);
+  border-bottom: 2px solid var(--accent);
+  padding: 12px 0;
+}
+
+.brand-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.brand-logo span {
+  color: var(--accent);
+}
+
+.nav-link-custom {
+  color: #d1d5db;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 4px;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.nav-link-custom:hover,
+.nav-link-custom.active {
+  color: var(--white);
+  background-color: var(--accent);
+}
+
+/* Custom Buttons with Solid Colors */
+.btn-imovies-primary {
+  background-color: var(--accent);
+  color: var(--white);
+  border: 1px solid var(--accent);
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 6px;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn-imovies-primary:hover {
+  background-color: var(--accent-hover);
+  color: var(--white);
+}
+
+.btn-imovies-secondary {
+  background-color: var(--primary);
+  color: var(--white);
+  border: 1px solid var(--primary);
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-imovies-secondary:hover {
+  background-color: var(--primary-light);
+  color: var(--white);
+}
+
+.btn-imovies-outline {
+  background-color: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--border);
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.btn-imovies-outline:hover {
+  background-color: #e2e8f0;
+}
+
+/* Cards & Containers */
+.imovies-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.movie-poster-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.movie-poster-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  background-color: #2d3748;
+}
+
+.movie-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.badge-solid {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-solid-accent {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+.badge-solid-dark {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.badge-solid-success {
+  background-color: var(--success);
+  color: var(--white);
+}
+
+.badge-solid-warning {
+  background-color: var(--warning);
+  color: var(--text-dark);
+}
+
+/* Seat Selection Layout */
+.screen-indicator {
+  background-color: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.seat-row-label {
+  width: 24px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.seat-box {
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  user-select: none;
+}
+
+.seat-available {
+  background-color: var(--seat-available);
+  color: var(--text-dark);
+}
+
+.seat-available:hover {
+  background-color: #cbd5e1;
+}
+
+.seat-selected {
+  background-color: var(--seat-selected);
+  color: var(--white);
+  border-color: var(--accent-hover);
+}
+
+.seat-booked {
+  background-color: var(--seat-booked);
+  color: #e2e8f0;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.seat-held {
+  background-color: #ecc94b;
+  color: var(--text-dark);
+  cursor: not-allowed;
+}
+
+.seat-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Filter Bar */
+.filter-bar {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+/* Ticket Confirmation Sheet */
+.ticket-container {
+  background-color: var(--white);
+  border: 2px dashed var(--accent);
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Footer */
+.app-footer {
+  background-color: var(--primary);
+  color: #94a3b8;
+  padding: 30px 0;
+  margin-top: 60px;
+  border-top: 1px solid #334155;
+  font-size: 0.9rem;
+}
+

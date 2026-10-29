@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Testing & Validation – IMovies</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="navbar-icon">🎬</div>
+    i<span>Movies</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="overview.html">Overview</a></li>
+    <li><a href="environment.html">Setup</a></li>
+    <li><a href="database.html">Database</a></li>
+    <li><a href="development.html">Development</a></li>
+    <li><a href="security.html">Security</a></li>
+    <li><a href="requirements.html">Requirements</a></li>
+  </ul>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      <a href="overview.html"><span class="icon">📋</span> Project Overview</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Documentation</div>
+      <a href="environment.html"><span class="icon">⚙️</span> Environment Setup</a>
+      <a href="database.html"><span class="icon">🗄️</span> Database Design</a>
+      <a href="development.html"><span class="icon">💻</span> App Development</a>
+      <a href="security.html"><span class="icon">🔒</span> Security & Auth</a>
+      <a href="frontend.html"><span class="icon">🎨</span> Frontend Integration</a>
+      <a href="testing.html" class="active"><span class="icon">🧪</span> Testing & Validation</a>
+      <a href="monitoring.html"><span class="icon">📊</span> Monitoring & Optimization</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a href="requirements.html"><span class="icon">🖥️</span> System Requirements</a>
+      <a href="outcome.html"><span class="icon">🏆</span> Outcomes</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <span>Testing & Validation</span>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🧪</span> 6. Testing & Validation</h2>
+      <div class="info-box">
+        <strong>Comprehensive Testing Strategy</strong>
+        Test every workflow including authentication, CRUD operations, booking logic, payment handling, seat availability, and UI responsiveness.
+      </div>
+    </div>
+
+    <!-- TEST AREAS -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📋</span> Testing Checklist</h2>
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">🔐</div><div class="card-title">Auth Workflows</div><div class="card-desc">Registration, login, JWT expiry, unauthorized access attempts</div></div>
+        <div class="card"><div class="card-icon">🎬</div><div class="card-title">Movie CRUD</div><div class="card-desc">Create, read, update, delete movies and shows as admin</div></div>
+        <div class="card"><div class="card-icon">🔍</div><div class="card-title">Search & Filter</div><div class="card-desc">Genre, language, location, and date-based movie filtering</div></div>
+        <div class="card"><div class="card-icon">💺</div><div class="card-title">Seat Availability</div><div class="card-desc">Real-time seat updates and double-booking prevention</div></div>
+        <div class="card"><div class="card-icon">💳</div><div class="card-title">Payment Flow</div><div class="card-desc">Success, failure, and edge case handling during checkout</div></div>
+        <div class="card"><div class="card-icon">❌</div><div class="card-title">Cancellation</div><div class="card-desc">Booking cancellation and seat release verification</div></div>
+        <div class="card"><div class="card-icon">📱</div><div class="card-title">Responsive UI</div><div class="card-desc">Cross-device layout testing on mobile, tablet, and desktop</div></div>
+        <div class="card"><div class="card-icon">🚨</div><div class="card-title">Error Handling</div><div class="card-desc">API errors, network failures, and form validations</div></div>
+      </div>
+    </div>
+
+    <!-- POSTMAN -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">📮</span> Postman API Testing</h2>
+      <div class="info-box info">
+        <strong>Testing Backend APIs with Postman</strong>
+        Create a Postman collection for each module. Use environment variables to store the JWT token and base URL for reuse across requests.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Test Case</th><th>Method</th><th>Endpoint</th><th>Expected</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Register User</td><td>POST</td><td>/api/auth/register</td><td>201 + user object</td></tr>
+            <tr><td>Login User</td><td>POST</td><td>/api/auth/login</td><td>200 + JWT token</td></tr>
+            <tr><td>Login – Wrong Password</td><td>POST</td><td>/api/auth/login</td><td>401 Invalid credentials</td></tr>
+            <tr><td>Get Movies</td><td>GET</td><td>/api/movies</td><td>200 + movies array</td></tr>
+            <tr><td>Filter by Genre</td><td>GET</td><td>/api/movies?genre=Action</td><td>200 + filtered array</td></tr>
+            <tr><td>Create Movie (Admin)</td><td>POST</td><td>/api/movies</td><td>201 + movie object</td></tr>
+            <tr><td>Create Movie (User)</td><td>POST</td><td>/api/movies</td><td>403 Forbidden</td></tr>
+            <tr><td>Create Booking</td><td>POST</td><td>/api/bookings</td><td>201 + booking object</td></tr>
+            <tr><td>Double-Book Seat</td><td>POST</td><td>/api/bookings</td><td>400 Already booked</td></tr>
+            <tr><td>Cancel Booking</td><td>PUT</td><td>/api/bookings/:id/cancel</td><td>200 + updated status</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VALIDATION -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">✅</span> Server-Side Validation</h2>
+      <span class="code-label">Example – Booking Validation</span>
+      <pre><code>const validateBooking = (req, res, next) => {
+  const { showId, seats } = req.body;
+
+  if (!showId) {
+    return res.status(400).json({ message: 'Show ID is required' });
+  }
+
+  if (!seats || !Array.isArray(seats) || seats.length === 0) {
+    return res.status(400).json({ message: 'At least one seat must be selected' });
+  }
+
+  if (seats.length > 10) {
+    return res.status(400).json({ message: 'Maximum 10 seats per booking' });
+  }
+
+  next();
+};
+
+// Apply to route
+router.post('/', protect, validateBooking, createBooking);</code></pre>
+    </div>
+
+    <!-- FRONTEND VALIDATION -->
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🎯</span> Frontend Form Validation</h2>
+      <span class="code-label">Registration Form Validation</span>
+      <pre><code>const validateRegister = (values) => {
+  const errors = {};
+
+  if (!values.name || values.name.trim().length < 2) {
+    errors.name = 'Name must be at least 2 characters';
+  }
+
+  if (!values.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+    errors.email = 'Enter a valid email address';
+  }
+
+  if (!values.password || values.password.length < 6) {
+    errors.password = 'Password must be at least 6 characters';
+  }
+
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'Passwords do not match';
+  }
+
+  return errors;
+};</code></pre>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title"><span class="icon">🏁</span> Test Completion Criteria</h2>
+      <ul class="feature-list">
+        <li>All auth endpoints return correct status codes and messages.</li>
+        <li>Admin routes reject non-admin users with 403 Forbidden.</li>
+        <li>Booking prevents double-seat reservation correctly.</li>
+        <li>Search and filter returns accurate, relevant results.</li>
+        <li>Payment success flow updates booking status to confirmed.</li>
+        <li>Cancellation updates seat availability in real time.</li>
+        <li>All form fields show proper validation errors.</li>
+        <li>UI renders correctly on mobile (375px) and desktop (1280px+).</li>
+      </ul>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  🎬 <span>IMovies</span> &nbsp;|&nbsp; MERN Stack Cinema Booking Platform &nbsp;|&nbsp; Documentation v1.0.0
+</footer>
+</body>
+</html>
+
